@@ -18,7 +18,7 @@ export interface Daum {
 export async function webhook_add (props: { store_id: number, event: number, url: string }): Promise<Result<WebhookAddResponse, AiqError>> {
   try {
     const api = await axios({
-      url: `${process.env.AIQ_URL}/store/${props.store_id}/webhooks/`,
+      url: `${AppStorage.getItem('base_url')}/store/${props.store_id}/webhooks/`,
       method: 'POST',
       headers: {
         'Aiq-User-Agent': AppStorage.getItem('user_agent'),

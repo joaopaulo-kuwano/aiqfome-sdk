@@ -45,7 +45,7 @@ export interface Link {
 export async function webhook_list(props: { store_id: string }): Promise<Result<WebhookListResponse, AiqError>> {
   try {
     const api = await axios({
-      url: `${process.env.AIQ_URL}/store/${props.store_id}/webhooks`,
+      url: `${AppStorage.getItem('base_url')}/store/${props.store_id}/webhooks`,
       headers: {
         'Aiq-User-Agent': AppStorage.getItem('user_agent'),
         'aiq-client-authorization': AppStorage.getItem('client_authorization'),

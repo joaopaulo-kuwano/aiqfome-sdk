@@ -8,6 +8,7 @@ import { store_list, StoreListResponse } from './store_list'
 import { webhook_list, WebhookListResponse } from './webhook_list'
 import { webhook_delete, WebhookDeleteResponse } from './webhook_delete'
 import { webhook_add, WebhookAddResponse } from './webhook_add'
+import { new_order, NewOrderResponse } from './new_order'
 
 /**   
   private access_token: string
@@ -99,5 +100,30 @@ export class Aiqfome {
     return await webhook_add({ ...props })
   }
 
+  async new_order(props: {
+    store_id: number
+    user_email: string
+    payment_method_id: number
+    amount: number
+    number_of_items: number
+    number_of_additional_items: number
+    number_of_mandatory_items: number
+    number_of_sub_items: number
+    status: number
+    address: {
+      nickname: string
+      street_name: string
+      number: string
+      complement: string
+      reference: string
+      postal_code: string
+      type: string
+      phone: string
+      neighborhood_name: string
+      delivery_tax: number
+    }
+  }): Promise<Result<NewOrderResponse, AiqError>> {
+    return await new_order({ ...props })
+  }
 
 }
