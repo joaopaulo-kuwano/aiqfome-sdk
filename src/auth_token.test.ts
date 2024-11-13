@@ -3,7 +3,7 @@ import { Aiqfome } from '.'
 import env from 'dotenv'
 env.config()
 
-it ('deve gerar token de acesso aiq', async () => {
+it('deve gerar token de acesso aiq', async () => {
   const sdk = new Aiqfome({
     base_url: process.env.AIQ_URL || '',
     client_authorization: process.env.AIQ_CLIENT_AUTH || '',
@@ -15,8 +15,5 @@ it ('deve gerar token de acesso aiq', async () => {
   })
   
   const api = await sdk.auth_token()
-  console.log(api)
-
-  // expect(api.isOk).toBeTruthy()
-
+  expect(api.isOk).toBe(true)
 })
