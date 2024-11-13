@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test:auth": "vitest --disable-console-intercept --silent=false ./src/auth_token.test.ts",
-    "test": "vitest --disable-console-intercept",
+    "test": "vitest --disable-console-intercept --silent=false --exclude ./src/auth_token.test.ts",
     "dev": "tsx src/index.ts"
   },
   "author": "joaop",
