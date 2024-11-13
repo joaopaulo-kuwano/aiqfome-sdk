@@ -5,7 +5,8 @@ import { orders_search, OrdersSearchResponse } from './orders_search'
 import { AiqError } from './default_error'
 import { order_search, OrderSearchResponse } from './order_search'
 import { store_list, StoreListResponse } from './store_list'
-import { webhook_list } from './webhook_list'
+import { webhook_list, WebhookListResponse } from './webhook_list'
+import { webhook_delete, WebhookDeleteResponse } from './webhook_delete'
 
 /**   
   private access_token: string
@@ -85,8 +86,12 @@ export class Aiqfome {
     return await store_list({ ...props })
   }
 
-  async webhook_list(props: { store_id: string }): Promise<Result<any, AiqError>> {
+  async webhook_list(props: { store_id: string }): Promise<Result<WebhookListResponse, AiqError>> {
     return await webhook_list({ ...props })
+  }
+
+  async webhook_delete(props: { store_id: number, hook_id: number }): Promise<Result<WebhookDeleteResponse, AiqError>> {
+    return await webhook_delete({ ...props })
   }
 
 
