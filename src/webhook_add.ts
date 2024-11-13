@@ -3,10 +3,8 @@ import { AppStorage } from "./app_storage";
 import { AiqError, DefaultAiqError } from "./default_error";
 import { Result } from "true-myth";
 
-export interface WebhookListResponse {
+export interface WebhookAddResponse {
   data: Daum[]
-  links: Links
-  meta: Meta
 }
 
 export interface Daum {
@@ -17,45 +15,28 @@ export interface Daum {
   event_name: string
 }
 
-export interface Links {
-  first: string
-  last: string
-  prev: any
-  next: any
-}
-
-export interface Meta {
-  current_page: number
-  from: number
-  last_page: number
-  links: Link[]
-  path: string
-  per_page: number
-  to: number
-  total: number
-}
-
-export interface Link {
-  url?: string
-  label: string
-  active: boolean
-}
-
-
-export async function webhook_list(props: { store_id: string }): Promise<Result<WebhookListResponse, AiqError>> {
+export async function webhook_add (props: { store_id: number, event: number, url: string }): Promise<Result<WebhookAddResponse, AiqError>> {
   try {
     const api = await axios({
-      url: `${process.env.AIQ_URL}/store/${props.store_id}/webhooks`,
+      url: `${process.env.AIQ_URL}/store/${props.store_id}/webhooks/`,
+      method: 'POST',
       headers: {
         'Aiq-User-Agent': AppStorage.getItem('user_agent'),
         'aiq-client-authorization': AppStorage.getItem('client_authorization'),
         'Authorization': 'Bearer ' + AppStorage.getItem('access_token'),
       },
-      method: 'GET'
+      data: {
+        webhooks: [
+          {
+            secret_key: 'Basic YWlxZm9tZToxJFBoOEJJTzY0',
+            webhook_event_id: props.event,
+            url: props.url
+          }
+        ]
+      }
     })
 
-    const data = api.data as WebhookListResponse
-    console.log(data)
+    const data = api.data as WebhookAddResponse
     return Result.ok(data)
 
   } catch (err: any) {

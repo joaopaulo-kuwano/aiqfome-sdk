@@ -7,6 +7,7 @@ import { order_search, OrderSearchResponse } from './order_search'
 import { store_list, StoreListResponse } from './store_list'
 import { webhook_list, WebhookListResponse } from './webhook_list'
 import { webhook_delete, WebhookDeleteResponse } from './webhook_delete'
+import { webhook_add, WebhookAddResponse } from './webhook_add'
 
 /**   
   private access_token: string
@@ -92,6 +93,10 @@ export class Aiqfome {
 
   async webhook_delete(props: { store_id: number, hook_id: number }): Promise<Result<WebhookDeleteResponse, AiqError>> {
     return await webhook_delete({ ...props })
+  }
+
+  async webhook_add(props: { store_id: number, event: number, url: string }): Promise<Result<WebhookAddResponse, AiqError>> {
+    return await webhook_add({ ...props })
   }
 
 
