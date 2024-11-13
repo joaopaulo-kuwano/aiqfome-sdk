@@ -3,6 +3,7 @@ import { auth_token, AuthTokenResponse } from './auth_token'
 import { AppStorage } from './app_storage'
 import { orders_search, OrdersSearchResponse } from './orders_search'
 import { AiqError } from './default_error'
+import { order_search, OrderSearchResponse } from './order_search'
 
 export class Aiqfome {
 
@@ -74,6 +75,10 @@ export class Aiqfome {
     store_id?: string
   }): Promise<Result<OrdersSearchResponse, AiqError>> {
     return await orders_search({ ...props })
+  }
+
+  async order_search(props: { order_id: number }): Promise<Result<OrderSearchResponse, AiqError>> {
+    return await order_search({ ...props })
   }
 
 }
