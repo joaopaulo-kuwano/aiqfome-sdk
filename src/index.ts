@@ -4,9 +4,9 @@ import { AppStorage } from './app_storage'
 import { orders_search, OrdersSearchResponse } from './orders_search'
 import { AiqError } from './default_error'
 import { order_search, OrderSearchResponse } from './order_search'
+import { store_list, StoreListResponse } from './store_list'
 
-export class Aiqfome {
-
+/**   
   private access_token: string
   private refresh_token: string
   private base_url: string
@@ -16,18 +16,11 @@ export class Aiqfome {
   private user_agent: string
   private user_login: string
   private user_pass: string
+ */
 
-  constructor() {
-    this.base_url = ''
-    this.client_authorization = ''
-    this.client_id = ''
-    this.client_secret = ''
-    this.user_agent = ''
-    this.user_login = ''
-    this.user_pass = ''
-    this.access_token = ''
-    this.refresh_token = ''
-  }
+export class Aiqfome {
+
+  constructor() { }
 
   async auth_token(params: {
     base_url: string
@@ -80,5 +73,17 @@ export class Aiqfome {
   async order_search(props: { order_id: number }): Promise<Result<OrderSearchResponse, AiqError>> {
     return await order_search({ ...props })
   }
+
+  async store_list(props: {
+    page?: string
+    per_page?: string
+    id?: string
+    name?: string
+    city_ids?: string
+  }): Promise<Result<StoreListResponse, AiqError>> {
+    return await store_list({ ...props })
+  }
+
+  
 
 }
